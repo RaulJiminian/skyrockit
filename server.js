@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const path = require("path");
 dotenv.config();
 const express = require("express");
 const app = express();
@@ -17,6 +18,7 @@ const port = process.env.PORT ? process.env.PORT : "3000";
 app.use(express.urlencoded({ extended: false })); // Allows us to parse form data and include in request body
 app.use(methodOverride("_method")); // "Tricks" Express into allowing PUT and DELETE requests from forms
 app.use(morgan("dev")); // Logger
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
